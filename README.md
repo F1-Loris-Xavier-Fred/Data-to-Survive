@@ -123,3 +123,6 @@ Après validation du périmètre initial (**Axe 1 — Vitesse & Chronos** en cou
 | :--- | :--- | :--- |
 | **Axe 2 — Compétitivité** | • Enrichir **`resultats`** avec `position_depart` (`grid`), `position_arrivee` (`positionOrder`) et `tours_effectues` (`laps`)<br>• *(Optionnel)* Ajouter **`qualifications`** si analyse des chronos qualif (`q1`, `q2`, `q3` en ms) | • **Toujours `TracingInsights/RaceData` (`dataset#2.zip`, CC0-1.0)** — aucun nouveau dataset requis<br>• `results.csv` (`grid`, `positionOrder`, `laps`) et `lap_times.csv`<br>• *(Optionnel)* `qualifying.csv` |
 | **Axe 3 — Fiabilité** | • Enrichir **`statuts`** avec `categorie_fiabilite` (ex. `Termine`, `Mecanique`, `Accident/Incident`, `Autre`)<br>• Enrichir **`resultats`** avec `tours_effectues` (`laps`) | • **Toujours `TracingInsights/RaceData` (`dataset#2.zip`, CC0-1.0)** — aucun nouveau dataset requis<br>• `status.csv` (`statusId`, `status`) et `results.csv` (`statusId`, `laps`) |
+
+
+test
