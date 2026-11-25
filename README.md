@@ -33,16 +33,16 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 
 ### Fichiers CSV utilisés par source
 
-#### 1. `TracingInsights/RaceData` (`data/01_bronze/dataset_1.zip` à `dataset_4.zip`)
-* **`circuits.csv`** : référentiel des circuits (`circuitId`, `name`, `country`).
-* **`races.csv`** : calendrier des Grands Prix (`raceId`, `year`, `circuitId`, `name`, `date`).
-* **`drivers.csv`** : informations pilotes (`driverId`, `forename`, `surname`, `nationality`).
-* **`constructors.csv`** : informations écuries (`constructorId`, `name`, `nationality`).
+#### 1. `TracingInsights/RaceData` (`data/01_bronze/dataset_2.zip` principalement)
+* **`circuits.csv`** : référentiel des circuits (`circuitId`, `circuitRef`, `name`, `country`).
+* **`races.csv`** : calendrier des Grands Prix (`raceId`, `year`, `round`, `circuitId`, `name`, `date`).
+* **`drivers.csv`** : informations pilotes (`driverId`, `driverRef`, `forename`, `surname`, `nationality`).
+* **`constructors.csv`** : informations écuries (`constructorId`, `constructorRef`, `name`, `nationality`).
 * **`status.csv`** : libellés des statuts de fin de course (`statusId`, `status`).
 * **`results.csv`** : résultats par pilote et par course (`raceId`, `driverId`, `constructorId`, `statusId`, `fastestLapTime`, `fastestLapSpeed`).
 * **`lap_times.csv`** : temps tour par tour (`raceId`, `driverId`, `lap`, `milliseconds`).
 
-#### 2. `F1DB` (`data/01_bronze/`)
+#### 2. `F1DB` (`data/01_bronze/` et `data/02_silver/`)
 * **`f1db-races.csv`** : calendrier des Grands Prix et longueurs de tracé (`courseLength`, `laps`, `year`, `date`).
 * **`f1db-races-fastest-laps.csv`** : meilleurs tours par pilote et par course (`raceId`, `driverId`, `lap`, `time`, `timeMillis`).
 * **`f1db-constructors-chronology.csv`** : filiation et chronologie des écuries (`parentConstructorId`, `constructorId`, `yearFrom`, `yearTo`).
@@ -57,7 +57,7 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 | **`circuits`** | Les 5 circuits étudiés (`id_circuit`, `nom_circuit`, `id_pays`, `url_img_circuit`) |
 | **`ecuries`** | Constructeurs engagés (`id_ecurie`, `id_pays`, `nom_ecurie`, `code_couleur`, `url_logo`) |
 | **`pilotes`** | Pilotes engagés (`id_pilote`, `nom_pilote`, `prenom_pilote`, `id_pays`, `url_img_casque`) |
-| **`reglementations`** | Ères réglementaires (`id_reglementation`, `annee_deb_regle`, `annee_fin_regle`, `caracteristiques`) |
+| **`reglementations`** | Ères réglementaires (`id_reglementation`, `nom_ere`, `caracteristiques`, `annee_deb_regle`, `annee_fin_regle`) |
 | **`saisons`** | Saisons rattachées aux réglementations (`id_saison`, `id_reglementation`) |
 | **`grand_prix`** | Grands Prix disputés sur le périmètre retenu (`id_grand_prix`, `id_saison`, `id_circuit`, `nom_grand_prix`, `date_grand_prix`) |
 | **`statuts`** | Statuts de fin de course (`id_statut`, `libelle_statut`) |
@@ -87,8 +87,8 @@ Data-to-Survive/
 │   ├── 02_silver/           # CSV extraits et filtrés (1997–2026, 5 circuits)
 │   └── 03_gold/             # Fichiers CSV finaux nettoyés prêts pour Snowflake
 ├── docs/
-│   ├── cahier_des_charges_architecture_projet_formule_1_1997_2026.md
-│   └── tables.md            # Dictionnaire des données et modèle relationnel (V3)
+│   ├── cahier_des_charges.md
+│   └── dictionnaire_tables.md  # Dictionnaire des données et modèle relationnel (V3)
 ├── onglets/
 │   ├── __init__.py
 │   ├── accueil.py           # Vue d'ensemble et KPIs globaux
@@ -126,5 +126,5 @@ Après validation du périmètre initial (**Axe 1 — Vitesse & Chronos**), le p
 
 | Axe / Périmètre | Évolutions tables / colonnes | Dataset source & CSV |
 | :--- | :--- | :--- |
-| **Axe 2 — Compétitivité** | Enrichir les données de course (`grid`, `positionOrder`, `laps`) et éventuellement ajouter une table `qualifications` (`q1`, `q2`, `q3`) | `TracingInsights/RaceData` (`dataset_1.zip`–`dataset_4.zip`, CC0-1.0) : `results.csv`, `lap_times.csv`, `qualifying.csv` |
-| **Axe 3 — Fiabilité** | Catégoriser les statuts (`Termine`, `Mecanique`, `Accident/Incident`, `Autre`) et exploiter `laps` | `TracingInsights/RaceData` (`dataset_1.zip`–`dataset_4.zip`, CC0-1.0) : `status.csv`, `results.csv` |
+| **Axe 2 — Compétitivité** | Enrichir les données de course (`grid`, `positionOrder`, `laps`) et éventuellement ajouter une table `qualifications` (`q1`, `q2`, `q3`) | `TracingInsights/RaceData` (`dataset_2.zip`, CC0-1.0) : `results.csv`, `lap_times.csv`, `qualifying.csv` |
+| **Axe 3 — Fiabilité** | Catégoriser les statuts (`Termine`, `Mecanique`, `Accident/Incident`, `Autre`) et exploiter `laps` | `TracingInsights/RaceData` (`dataset_2.zip`, CC0-1.0) : `status.csv`, `results.csv` |

@@ -31,10 +31,10 @@
 ### Sources utilisées (format multi-tables CSV)
 
 1. **TracingInsights RaceData (`TracingInsights/RaceData` — Licence CC0-1.0)**
-   * *Archives :* `data/01_bronze/dataset_1.zip` à `dataset_4.zip`
+   * *Archives :* `data/01_bronze/dataset_1.zip` à `dataset_5.zip` (référentiel principal sur `dataset_2.zip` pour les IDs numériques `lap_times.csv` et `status.csv`)
    * *Fichiers clés :* `circuits.csv`, `races.csv`, `results.csv`, `lap_times.csv`, `status.csv`, `drivers.csv`, `constructors.csv`.
 2. **F1DB (`f1db/f1db` — Licence CC-BY-4.0)**
-   * *Fichiers clés (`data/01_bronze/`) :* `f1db-races.csv` (longueurs de tracé `courseLength`, `laps`), `f1db-races-fastest-laps.csv`, `f1db-constructors-chronology.csv`.
+   * *Fichiers clés (`data/01_bronze/` et `data/02_silver/`) :* `f1db-races.csv` (longueurs de tracé `courseLength`, `laps`), `f1db-races-fastest-laps.csv`, `f1db-constructors-chronology.csv`.
 
 ### Architecture Médaillon & Nettoyage (`scripts/clean_data.py`)
 
