@@ -1,8 +1,84 @@
-# Data to Survive
+# 🏎️ Data to Survive
 
-## Stack utilisée :
-- Code : Python
-- Analyse : Polars
-- BDD + Déploiement : Snowflake
-- Graphs : Matplotlib / Seaborn / Plotly Express (à confirmer)
-- Interface (Front) : Streamlit
+Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circuits emblématiques (**Monza, Monaco, Spa-Francorchamps, Silverstone et Suzuka**), centrée dans un premier temps sur l'**Axe 1 : Vitesse pure & Chronos en course**.
+
+**Équipe :** Loris, Xavier et Fred
+
+---
+
+## 🎯 Objectifs du projet (Focus Courses — Axe 1)
+- Mesurer l'évolution des temps au tour (**moyen** et **meilleur chrono** en millisecondes) et des vitesses (**moyenne** et **de pointe** en km/h) par circuit et par ère réglementaire.
+- Isoler les courses validées via la gestion des statuts d'arrivée afin d'éviter les biais liés aux abandons précoces.
+- Restituer les analyses via une base relationnelle **Snowflake** et une application interactive **Streamlit**.
+
+---
+
+## 📦 Source des données
+
+### TracingInsights RaceData (`TracingInsights/RaceData`)
+- **Dépôt GitHub :** [https://github.com/TracingInsights/RaceData](https://github.com/TracingInsights/RaceData)
+- **Archive ZIP (dernière version) :** [https://github.com/TracingInsights/RaceData/releases/latest/download/data.zip](https://github.com/TracingInsights/RaceData/releases/latest/download/data.zip)
+- **Miroir HuggingFace :** [https://huggingface.co/datasets/tracinginsights/RaceData](https://huggingface.co/datasets/tracinginsights/RaceData)
+- **Licence :** CC0-1.0 (Domaine public — données Ergast / Jolpica-F1 mises à jour jusqu'à la saison 2026)
+
+### Fichiers CSV utilisés
+- **`circuits.csv`** : référentiel des circuits (`circuitId`, `name`, `country`).
+- **`races.csv`** : calendrier des Grands Prix (`raceId`, `year`, `circuitId`, `name`, `date`).
+- **`drivers.csv`** : informations pilotes (`driverId`, `forename`, `surname`, `nationality`).
+- **`constructors.csv`** : informations écuries (`constructorId`, `name`, `nationality`).
+- **`status.csv`** : libellés des statuts de fin de course (`statusId`, `status`).
+- **`results.csv`** : résultats par pilote et par course (`raceId`, `driverId`, `constructorId`, `statusId`, `fastestLapTime`, `fastestLapSpeed`).
+- **`lap_times.csv`** : temps tour par tour (`raceId`, `driverId`, `lap`, `milliseconds`) pour le calcul des moyennes en course.
+
+---
+
+## 🗄️ Architecture de la base de données (Snowflake)
+
+| Nom | Description |
+| :--- | :--- |
+| **`pays`** | Référentiel des pays associés aux circuits ainsi qu'aux nationalités des pilotes et des écuries (`id_pays`, `nom_pays`). |
+| **`circuits`** | Liste des 5 circuits retenus pour l'étude (Monza, Monaco, Spa-Francorchamps, Silverstone, Suzuka) reliés à leur pays (`id_circuit`, `nom_circuit`, `id_pays`). |
+| **`ecuries`** | Référentiel des constructeurs engagés en championnat (`id_ecurie`, `nom_ecurie`, `code_couleur`, `id_pays`). |
+| **`pilotes`** | Référentiel des pilotes ayant pris le départ des Grands Prix étudiés (`id_pilote`, `prenom_pilote`, `nom_pilote`, `id_pays`). |
+| **`reglementations`** | Découpage des grandes ères techniques et réglementaires de la F1 (`id_reglementation`, `nom_ere`, `annee_debut`, `annee_fin`, `caracteristiques`). |
+| **`saisons`** | Table des saisons de 1997 à 2026 rattachées à leur ère réglementaire respective (`id_saison`, `id_reglementation`). |
+| **`grand_prix`** | Informations générales de chaque Grand Prix disputé sur le périmètre retenu (`id_gp`, `id_saison`, `id_circuit`, `nom_gp`, `date_course`). |
+| **`statuts`** | Référentiel des statuts d'arrivée permettant de filtrer les courses validées et d'écarter les abandons précoces (`id_statut`, `libelle_statut`). |
+| **`resultats`** | Table centrale des performances par pilote et par course (`id_gp`, `id_pilote`, `id_ecurie`, `id_statut`, `avg_chrono`, `top_chrono`, `avg_speed`, `top_speed`). |
+
+---
+
+## 🛠️ Stack technique & Pipeline
+1. **Extraction & Nettoyage (Python / Pandas) :** filtrage sur la période 1997–2026 et les 5 circuits, gestion des valeurs nulles, conversion des chronos en millisecondes (`INT`) et calcul des moyennes par course.
+2. **Stockage & Modélisation (Snowflake) :** chargement des 9 tables normalisées et requêtage analytique SQL.
+3. **Visualisation (Streamlit) :** tableau de bord interactif modulaire avec filtres par circuit, saison, écurie et ère réglementaire.
+
+---
+
+## 📁 Structure du dépôt
+
+```text
+Data-to-Survive/
+├── .streamlit/
+│   └── config.toml          # Configuration du thème Streamlit
+├── data/
+│   ├── data_brute/          # Archives brutes (.zip) issues des datasets sources
+│   └── data_clean/          # Fichiers CSV nettoyés prêts pour Snowflake
+├── docs/
+│   ├── cahier_des_charges_architecture_donnees.md
+│   └── tables.md            # Dictionnaire des données et modèle relationnel
+├── onglets/
+│   ├── __init__.py
+│   ├── accueil.py           # Vue d'ensemble et KPIs globaux
+│   ├── vitesse.py           # Axe 1 : Vitesse & Chronos par ère / saison
+│   ├── circuits.py          # Comparatif des 5 circuits
+│   └── ecuries.py           # Analyse par écurie (avec codes couleur)
+├── scripts/
+│   ├── clean_data.py        # Nettoyage, normalisation et calcul des indicateurs Pandas
+│   └── load_snowflake.py    # Chargement des tables dans Snowflake
+├── sql/
+│   └── schema.sql           # Création des tables Snowflake
+├── .gitignore
+├── app.py                   # Point d'entrée de l'application Streamlit
+├── README.md
+└── requirements.txt         # Dépendances Python
