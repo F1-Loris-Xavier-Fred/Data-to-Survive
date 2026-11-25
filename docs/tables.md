@@ -31,7 +31,7 @@ Constructeurs engagés sur les courses filtrées.
 | `id_ecurie` | `INT` | `PK` | `constructorId` (`constructors.csv`) |
 | `nom_ecurie` | `VARCHAR(150)` | `NOT NULL, UNIQUE` | `name` (`constructors.csv`) |
 | `code_couleur` | `VARCHAR(7)` | `NULL` | Dernière couleur officielle hexadécimale (`#RRGGBB`) ajoutée hors CSV |
-| `id_pays` | `INT` | `FK -> pays.id_pays` | Nationalité de l'écurie |
+| `id_pays` | `INT` | `NULL, FK -> pays.id_pays` | Nationalité de l'écurie (peut être null si non renseignée / à normaliser) |
 
 ### `pilotes`
 Pilotes ayant pris le départ des Grands Prix filtrés.
@@ -86,15 +86,15 @@ Statuts d'arrivée ou d'abandon en course.
 ## 2. Table de faits
 
 ### `resultats`
-Performances chronométriques et vitesses par pilote et par Grand Prix.
+Performances chronométriques et vitesses par pilote et par Grand Prix. Clé primaire composite : `(id_gp, id_pilote)`.
 
 | Colonne | Type Snowflake | Contraintes | Source / Description |
 | :--- | :--- | :--- | :--- |
-| `id_gp` | `INT` | `PK, FK -> grand_prix.id_gp` | Grand Prix (`raceId`) |
-| `id_pilote` | `INT` | `PK, FK -> pilotes.id_pilote` | Pilote (`driverId`) |
+| `id_gp` | `INT` | `PK (1/2), FK -> grand_prix.id_gp` | Grand Prix (`raceId`) |
+| `id_pilote` | `INT` | `PK (2/2), FK -> pilotes.id_pilote` | Pilote (`driverId`) |
 | `id_ecurie` | `INT` | `NOT NULL, FK -> ecuries.id_ecurie` | Écurie (`constructorId`) |
 | `id_statut` | `INT` | `NOT NULL, FK -> statuts.id_statut` | Statut d'arrivée (`statusId`) |
 | `avg_chrono` | `INT` | `NULL` | Moyenne des temps au tour en ms (`lap_times.csv`) |
 | `top_chrono` | `INT` | `NULL` | Meilleur chrono en ms (`fastestLapTime` / min `lap_times.csv`) |
-| `avg_speed` | `FLOAT` | `NULL` | Vitesse moyenne en km/h calculée via Pandas |
+| `avg_speed` | `FLOAT` | `NULL` | Moyenne des relevés de vitesse (en km/h) agrégée par circuit et par année |
 | `top_speed` | `FLOAT` | `NULL` | Vitesse du meilleur tour en km/h (`fastestLapSpeed`) |

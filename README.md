@@ -13,6 +13,16 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 
 ---
 
+## 📋 Suivi du projet & Organisation
+
+- **Suivi quotidien des tâches (Google Sheets) :** [Tableau de suivi — Data to Survive](https://docs.google.com/spreadsheets/d/1i7hicBHCIE0ChhZ_ZcqStX2iAYfbgVwJfkxkMjlQ4_U/edit?gid=0#gid=0)
+- **Workflow Git :**
+  - `main` : version stable du projet.
+  - `dev` : branche d'intégration commune de l'équipe.
+  - `dev-fred`, `dev-xavier`, `dev-loris` : branches de développement individuelles.
+
+---
+
 ## 📦 Source des données
 
 ### TracingInsights RaceData (`TracingInsights/RaceData`)
@@ -22,6 +32,7 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 - **Licence :** CC0-1.0 (Domaine public — données Ergast / Jolpica-F1 mises à jour jusqu'à la saison 2026)
 
 ### Fichiers CSV utilisés
+Les fichiers CSV ci-dessous sont extraits de l'archive **`data/data_brute/dataset#2.zip`** (source **`TracingInsights/RaceData`**) :
 - **`circuits.csv`** : référentiel des circuits (`circuitId`, `name`, `country`).
 - **`races.csv`** : calendrier des Grands Prix (`raceId`, `year`, `circuitId`, `name`, `date`).
 - **`drivers.csv`** : informations pilotes (`driverId`, `forename`, `surname`, `nationality`).
@@ -82,3 +93,32 @@ Data-to-Survive/
 ├── app.py                   # Point d'entrée de l'application Streamlit
 ├── README.md
 └── requirements.txt         # Dépendances Python
+
+
+---
+
+```
+
+---
+
+## 🚀 Lancement de l'application
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 📈 Évolution prévisionnelle : Axes 2 & 3 *(si le temps le permet)*
+
+Après validation du périmètre initial (**Axe 1 — Vitesse & Chronos** en course), le projet pourra s'étendre sur deux axes complémentaires :
+- **Axe 2 — Compétitivité / Serrage de la grille :** analyse des écarts de performance entre pilotes/écuries et de l'évolution des positions/chronos selon les réglementations.
+- **Axe 3 — Fiabilité mécanique :** analyse des taux d'abandon et de la répartition des causes (problèmes mécaniques/moteur/boîte vs incidents/accidents ou courses terminées) par ère et par circuit.
+
+### Besoins complémentaires (Tables & Dataset source)
+
+| Axe / Périmètre | Tables à ajouter ou enrichir | Dataset source & fichiers CSV nécessaires |
+| :--- | :--- | :--- |
+| **Axe 2 — Compétitivité** | • Enrichir **`resultats`** avec `position_depart` (`grid`), `position_arrivee` (`positionOrder`) et `tours_effectues` (`laps`)<br>• *(Optionnel)* Ajouter **`qualifications`** si analyse des chronos qualif (`q1`, `q2`, `q3` en ms) | • **Toujours `TracingInsights/RaceData` (`dataset#2.zip`, CC0-1.0)** — aucun nouveau dataset requis<br>• `results.csv` (`grid`, `positionOrder`, `laps`) et `lap_times.csv`<br>• *(Optionnel)* `qualifying.csv` |
+| **Axe 3 — Fiabilité** | • Enrichir **`statuts`** avec `categorie_fiabilite` (ex. `Termine`, `Mecanique`, `Accident/Incident`, `Autre`)<br>• Enrichir **`resultats`** avec `tours_effectues` (`laps`) | • **Toujours `TracingInsights/RaceData` (`dataset#2.zip`, CC0-1.0)** — aucun nouveau dataset requis<br>• `status.csv` (`statusId`, `status`) et `results.csv` (`statusId`, `laps`) |
