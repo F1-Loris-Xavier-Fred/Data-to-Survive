@@ -253,7 +253,7 @@
         {
           "id": "mRCVR_1emouynaBNsT9Tw",
           "name": "code_couleur",
-          "type": "INT",
+          "type": "VARCHAR",
           "default": "",
           "check": "",
           "primary": false,
@@ -261,7 +261,7 @@
           "notNull": true,
           "increment": false,
           "comment": "",
-          "size": "",
+          "size": 10,
           "values": []
         },
         {
@@ -301,7 +301,7 @@
           "unique": false,
           "unsigned": true,
           "notNull": true,
-          "increment": true,
+          "increment": false,
           "comment": "",
           "id": "sKog9WKd-Lx_6xx6F8M9R"
         },
@@ -509,7 +509,7 @@
           "unique": false,
           "unsigned": true,
           "notNull": true,
-          "increment": true,
+          "increment": false,
           "comment": "",
           "id": "vpwvjIMx33RSNHqLSaxaB"
         },

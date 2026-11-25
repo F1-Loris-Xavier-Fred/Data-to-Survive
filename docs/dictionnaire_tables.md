@@ -1,4 +1,4 @@
-# Dictionnaire des données — Data to Survive (V3)
+# Dictionnaire des données — Data to Survive
 
 Modèle relationnel cible (**`F1_Data` — V3**) pour le projet **Data to Survive (1997–2026)**, alimenté depuis la couche **`data/03_gold/`**, filtré sur 5 circuits (**Monza, Monaco, Spa-Francorchamps, Silverstone, Suzuka**) et centré sur l'**Axe 1 : Vitesse & Chronos**.
 
@@ -33,7 +33,7 @@ Constructeurs engagés sur les courses filtrées.
 | `id_ecurie` | `INT` | `PK, AUTOINCREMENT` | Identifiant de l'écurie |
 | `id_pays` | `INT` | `NOT NULL, FK -> pays.id_pays` | Pays / nationalité de l'écurie |
 | `nom_ecurie` | `VARCHAR(255)` | `NOT NULL` | Nom de l'écurie |
-| `code_couleur` | `INT` | `NOT NULL` | Code couleur de l'écurie (selon V3) |
+| `code_couleur` | `VARCHAR(10)` | `NOT NULL` | Code couleur hexadécimal ou identifiant couleur de l'écurie |
 | `url_logo` | `TEXT` | `NOT NULL` | URL du logo de l'écurie |
 
 ### `pilotes` (`data/03_gold/pilotes.csv`)
@@ -53,16 +53,17 @@ Découpage des ères réglementaires de la F1.
 | Colonne | Type | Contraintes | Source / Description |
 | :--- | :--- | :--- | :--- |
 | `id_reglementation` | `INT` | `PK, AUTOINCREMENT` | Identifiant unique de la réglementation |
+| `nom_ere` | `VARCHAR(255)` | `NOT NULL` | Nom de l'ère réglementaire |
+| `caracteristiques` | `VARCHAR(255)` | `NOT NULL` | Caractéristiques techniques de la réglementation |
 | `annee_deb_regle` | `INT` | `NOT NULL` | Année de début de la réglementation |
 | `annee_fin_regle` | `INT` | `NULL` | Année de fin de la réglementation |
-| `caracteristiques` | `VARCHAR(255)` | `NOT NULL` | Caractéristiques techniques de la réglementation |
 
 ### `saisons` (`data/03_gold/saisons.csv`)
 Saisons rattachées à une réglementation.
 
 | Colonne | Type | Contraintes | Source / Description |
 | :--- | :--- | :--- | :--- |
-| `id_saison` | `INT` | `PK, AUTOINCREMENT` | Saison (`year`, 1997–2026) |
+| `id_saison` | `INT` | `PK, NOT NULL` | Saison (`year`, 1997–2026) |
 | `id_reglementation` | `INT` | `NOT NULL, FK -> reglementations.id_reglementation` | Réglementation associée |
 
 ### `grand_prix` (`data/03_gold/grand_prix.csv`)
@@ -91,7 +92,7 @@ Comptes et rôles applicatifs.
 | :--- | :--- | :--- | :--- |
 | `id_user` | `INT` | `PK, AUTOINCREMENT` | Identifiant utilisateur |
 | `nom_user` | `VARCHAR(255)` | `NOT NULL` | Nom d'utilisateur |
-| `mdp_user` | `VARCHAR(255)` | `NOT NULL` | Mot de passe |
+| `mdp_user` | `VARCHAR(255)` | `NOT NULL` | Mot de passe (hashé de préférence) |
 | `role` | `VARCHAR(255)` | `NOT NULL` | Rôle utilisateur |
 
 ---
@@ -103,8 +104,8 @@ Performances tour par tour par Grand Prix et par pilote. Clé primaire composite
 
 | Colonne | Type | Contraintes | Source / Description |
 | :--- | :--- | :--- | :--- |
-| `id_grand_prix` | `INT` | `PK (1/3), AUTOINCREMENT, FK -> grand_prix.id_grand_prix` | Grand Prix |
-| `id_pilote` | `INT` | `PK (2/3), FK -> pilotes.id_pilote` | Pilote |
+| `id_grand_prix` | `INT` | `PK (1/3), NOT NULL, FK -> grand_prix.id_grand_prix` | Grand Prix |
+| `id_pilote` | `INT` | `PK (2/3), NOT NULL, FK -> pilotes.id_pilote` | Pilote |
 | `id_lap` | `INT` | `PK (3/3), NOT NULL` | Numéro de tour |
 | `id_ecurie` | `INT` | `NOT NULL, FK -> ecuries.id_ecurie` | Écurie |
 | `id_statut` | `INT` | `NOT NULL, FK -> statuts.id_statut` | Statut de fin de course |
