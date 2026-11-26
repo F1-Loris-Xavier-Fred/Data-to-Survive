@@ -77,7 +77,6 @@ CREATE TABLE IF NOT EXISTS "resultats_laps" (
     "id_ecurie" INT NOT NULL,
     "id_statut" INT NOT NULL,
     "lap_time" TIME,
-    "lap_top_speed" FLOAT,
     "lap_avg_speed" FLOAT,
     PRIMARY KEY ("id_grand_prix", "id_pilote", "id_lap"),
     CONSTRAINT "fk_resultats_laps_grand_prix" FOREIGN KEY ("id_grand_prix") REFERENCES "grand_prix" ("id_grand_prix"),

@@ -40,7 +40,7 @@
 
 * **`data/01_bronze/` (Brut) :** Stockage des archives `.zip` et des exports CSV bruts non modifiés.
 * **`data/02_silver/` (Intermédiaire) :** Extraction, remplacement des valeurs nulles spécifiques (`\N` -> `NaN`), filtrage strict sur `1997–2026` et les 5 circuits (`Monza`, `Monaco`, `Spa-Francorchamps`, `Silverstone`, `Suzuka`), et harmonisation des clés.
-* **`data/03_gold/` (Prêt pour Snowflake) :** Production des 10 tables normalisées du modèle **V3 (`F1_Data`)** (`pays`, `circuits`, `ecuries`, `pilotes`, `reglementations`, `saisons`, `grand_prix`, `statuts`, `resultats_laps`, `users`) avec formatage des chronos au tour (`lap_time` en `TIME`) et calcul des vitesses (`lap_top_speed`, `lap_avg_speed`).
+* **`data/03_gold/` (Prêt pour Snowflake) :** Production des 10 tables normalisées du modèle **V3 (`F1_Data`)** (`pays`, `circuits`, `ecuries`, `pilotes`, `reglementations`, `saisons`, `grand_prix`, `statuts`, `resultats_laps`, `users`) avec formatage des chronos au tour (`lap_time` en `TIME`) et calcul de la vitesse moyenne au tour (`lap_avg_speed`).
 
 ---
 
@@ -48,7 +48,7 @@
 
 Chacun pilote un axe métier complet (requête SQL Snowflake + onglet Streamlit) :
 
-* **Axe 1 — Vitesse pure & Chronos (Focus prioritaire) :** Évolution des temps au tour et des vitesses (moyenne et de pointe) par circuit, saison et ère réglementaire.
+* **Axe 1 — Vitesse pure & Chronos (Focus prioritaire) :** Évolution des temps au tour et des vitesses moyennes en course par circuit, saison et ère réglementaire.
 * **Axe 2 — Serrage de la grille & Compétitivité *(extension)* :** Écarts de performance entre pilotes/écuries et diversité des résultats par ère sur ces 5 tracés.
 * **Axe 3 — Fiabilité mécanique *(extension)* :** Évolution du taux d'abandons techniques (`statuts`) face à la complexification des moteurs et de l'aérodynamique.
 

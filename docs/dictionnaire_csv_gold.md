@@ -34,7 +34,7 @@ data gold : `statuts.csv`
 ## CSV : resultats_laps.csv
 
 Script : `clean_lap_times.ipynb`
-data silver : `clean_lap_times.csv` | `races.csv`
+data silver : `lap_times.csv` | `f1db-races.csv`
 data gold : `resultats_laps.csv`
 
 | Colonne | Type | Contraintes | Source / Description |
@@ -45,7 +45,6 @@ data gold : `resultats_laps.csv`
 | `id_ecurie` | `INT` | `NOT NULL, FK -> ecuries.id_ecurie` | Écurie |
 | `id_statut` | `INT` | `NOT NULL, FK -> statuts.id_statut` | Statut de fin de course |
 | `lap_time` | `TIME` | `NULL` | Temps du tour |
-| `lap_top_speed` | `FLOAT` | `NULL` | Vitesse maximale / pointe sur le tour |
 | `lap_avg_speed` | `FLOAT` | `NULL` | Vitesse moyenne sur le tour |
 
-## CSV : 
+## CSV :
