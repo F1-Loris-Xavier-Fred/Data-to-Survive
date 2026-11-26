@@ -27,3 +27,25 @@ data gold : `statuts.csv`
 | :--- | :--- | :--- | :--- |
 | `id_statut` | `INT` | `PK, AUTOINCREMENT` | Identifiant du statut |
 | `libelle_statut` | `VARCHAR(255)` | `NOT NULL` | Libellé du statut |
+
+
+--- 
+
+## CSV : resultats_laps.csv
+
+Script : `clean_lap_times.ipynb`
+data silver : `clean_lap_times.csv` | `races.csv`
+data gold : `resultats_laps.csv`
+
+| Colonne | Type | Contraintes | Source / Description |
+| :--- | :--- | :--- | :--- |
+| `id_grand_prix` | `INT` | `PK (1/3), NOT NULL, FK -> grand_prix.id_grand_prix` | Grand Prix |
+| `id_pilote` | `INT` | `PK (2/3), NOT NULL, FK -> pilotes.id_pilote` | Pilote |
+| `id_lap` | `INT` | `PK (3/3), NOT NULL` | Numéro de tour |
+| `id_ecurie` | `INT` | `NOT NULL, FK -> ecuries.id_ecurie` | Écurie |
+| `id_statut` | `INT` | `NOT NULL, FK -> statuts.id_statut` | Statut de fin de course |
+| `lap_time` | `TIME` | `NULL` | Temps du tour |
+| `lap_top_speed` | `FLOAT` | `NULL` | Vitesse maximale / pointe sur le tour |
+| `lap_avg_speed` | `FLOAT` | `NULL` | Vitesse moyenne sur le tour |
+
+## CSV : 
