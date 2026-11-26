@@ -61,7 +61,7 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 | **`saisons`** | Saisons rattachées aux réglementations (`id_saison`, `id_reglementation`) |
 | **`grand_prix`** | Grands Prix disputés sur le périmètre retenu (`id_grand_prix`, `id_saison`, `id_circuit`, `nom_grand_prix`, `date_grand_prix`) |
 | **`statuts`** | Statuts de fin de course (`id_statut`, `libelle_statut`) |
-| **`resultats_laps`** | Table de faits tour par tour (`id_grand_prix`, `id_pilote`, `id_lap`, `id_ecurie`, `id_statut`, `lap_time`, `lap_top_speed`, `lap_avg_speed`) |
+| **`resultats_laps`** | Table de faits tour par tour (`id_grand_prix`, `id_pilote`, `id_lap`, `id_ecurie`, `id_statut`, `lap_time`, `lap_avg_speed`) |
 | **`users`** | Comptes et rôles applicatifs (`id_user`, `nom_user`, `mdp_user`, `role`) |
 
 ---
