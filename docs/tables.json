@@ -584,18 +584,6 @@
           "values": []
         },
         {
-          "id": "3n7QS2VbG04FFFHnVGPWC",
-          "name": "lap_top_speed",
-          "type": "FLOAT",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": ""
-        },
-        {
           "id": "1kNSCfSGvc29oBoakmo2b",
           "name": "lap_avg_speed",
           "type": "FLOAT",

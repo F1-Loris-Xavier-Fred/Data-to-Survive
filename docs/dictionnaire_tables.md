@@ -110,5 +110,4 @@ Performances tour par tour par Grand Prix et par pilote. Clé primaire composite
 | `id_ecurie` | `INT` | `NOT NULL, FK -> ecuries.id_ecurie` | Écurie |
 | `id_statut` | `INT` | `NOT NULL, FK -> statuts.id_statut` | Statut de fin de course |
 | `lap_time` | `TIME` | `NULL` | Temps du tour |
-| `lap_top_speed` | `FLOAT` | `NULL` | Vitesse maximale / pointe sur le tour |
 | `lap_avg_speed` | `FLOAT` | `NULL` | Vitesse moyenne sur le tour |
