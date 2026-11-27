@@ -1,0 +1,59 @@
+:root {
+  --dts-bg-dark: #12161b;
+  --dts-surface: #1b2129;
+  --dts-lime: #d8f300;
+  --dts-blue: #0088ff;
+  --dts-white: #ffffff;
+}
+
+.block-container {
+  padding-top: 3.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+[data-testid="stSidebarHeader"] {
+  display: none;
+}
+
+[data-testid="stSidebarUserContent"] {
+  padding-top: 3.8rem !important;
+}
+
+h1 {
+  color: var(--dts-white) !important;
+  border-left: 4px solid var(--dts-lime);
+  padding-left: 12px !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+h1 span.dts-accent {
+  color: var(--dts-lime);
+}
+
+.sidebar-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 136, 255, 0.55),
+    rgba(216, 243, 0, 0.85),
+    rgba(0, 136, 255, 0.55),
+    transparent
+  );
+  margin: 20px 0;
+}
+
+[data-testid="stMetricValue"] {
+  color: var(--dts-lime) !important;
+}
+
+[data-testid="stMetricLabel"] {
+  color: var(--dts-blue) !important;
+  font-weight: 600;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+  color: var(--dts-lime) !important;
+  border-bottom-color: var(--dts-blue) !important;
+}

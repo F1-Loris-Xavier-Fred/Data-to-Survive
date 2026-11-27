@@ -16,11 +16,18 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 
 ## 📋 Suivi du projet & Organisation
 
-* **Suivi quotidien des tâches (Google Sheets) :** [Tableau de suivi — Data to Survive](https://docs.google.com/spreadsheets/d/1i7hicBHCIE0ChhZ_ZcqStX2iAYfbgVwJfkxkMjlQ4_U/edit?gid=0#gid=0)
-* **Workflow Git :**
-  * `main` : version stable du projet.
-  * `dev` : branche d'intégration commune de l'équipe.
-  * `dev-fred`, `dev-xavier`, `dev-loris` : branches de développement individuelles.
+* **Google Sheets**
+  * Suivi quotidien des tâches -> [Tableau de suivi — Data to Survive](https://docs.google.com/spreadsheets/d/1i7hicBHCIE0ChhZ_ZcqStX2iAYfbgVwJfkxkMjlQ4_U/edit?gid=0#gid=0)
+* **Github**
+  * **Organisation** -> [F1-Loris-Xavier-Fred](https://github.com/F1-Loris-Xavier-Fred)
+  * **Repository** -> [Data-to-Survive](https://github.com/F1-Loris-Xavier-Fred/Data-to-Survive)
+  * **Kanban** -> [Kanban Projet Data to Survive](https://github.com/orgs/F1-Loris-Xavier-Fred/projects/3/views/1)
+* **Branches Git**
+  * **`main`** branche version stable du projet [-> lien](https://github.com/F1-Loris-Xavier-Fred/Data-to-Survive/tree/main)
+  * **`dev`** branche d'intégration commune de l'équipe [-> lien](https://github.com/F1-Loris-Xavier-Fred/Data-to-Survive/tree/dev) 
+  * **`dev-fred`** branche de développement de **Fred** [-> lien](https://github.com/F1-Loris-Xavier-Fred/Data-to-Survive/tree/dev-fred)
+  * **`dev-xavier`** branche de développement de **Xavier** [-> lien](https://github.com/F1-Loris-Xavier-Fred/Data-to-Survive/tree/dev-xavier)
+  * **`dev-loris`** branche de développement de **Loris** [-> lien](https://github.com/F1-Loris-Xavier-Fred/Data-to-Survive/tree/dev-loris)
 
 ---
 
