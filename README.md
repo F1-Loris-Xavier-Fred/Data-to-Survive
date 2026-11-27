@@ -9,7 +9,7 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 ## 🎯 Objectifs du projet (Focus Courses — Axe 1)
 
 * Mesurer l'évolution des temps au tour et des vitesses par circuit, saison et ère réglementaire.
-* Isoler les courses validées via la gestion des statuts d'arrivée afin d'éviter les biais liés aux abandons précoces.
+* Isoler les courses validées via la gestion des status d'arrivée afin d'éviter les biais liés aux abandons précoces.
 * Restituer les analyses via une base relationnelle **Snowflake** et une application interactive **Streamlit**.
 
 ---
@@ -38,7 +38,7 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 * **`races.csv`** : calendrier des Grands Prix (`raceId`, `year`, `round`, `circuitId`, `name`, `date`).
 * **`drivers.csv`** : informations pilotes (`driverId`, `driverRef`, `forename`, `surname`, `nationality`).
 * **`constructors.csv`** : informations écuries (`constructorId`, `constructorRef`, `name`, `nationality`).
-* **`status.csv`** : libellés des statuts de fin de course (`statusId`, `status`).
+* **`status.csv`** : libellés des status de fin de course (`statusId`, `status`).
 * **`results.csv`** : résultats par pilote et par course (`raceId`, `driverId`, `constructorId`, `statusId`, `fastestLapTime`, `fastestLapSpeed`).
 * **`lap_times.csv`** : temps tour par tour (`raceId`, `driverId`, `lap`, `milliseconds`).
 
@@ -60,7 +60,7 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 | **`reglementations`** | Ères réglementaires (`id_reglementation`, `nom_ere`, `caracteristiques`, `annee_deb_regle`, `annee_fin_regle`) |
 | **`saisons`** | Saisons rattachées aux réglementations (`id_saison`, `id_reglementation`) |
 | **`grand_prix`** | Grands Prix disputés sur le périmètre retenu (`id_grand_prix`, `id_saison`, `id_circuit`, `nom_grand_prix`, `date_grand_prix`) |
-| **`statuts`** | Statuts de fin de course (`id_statut`, `libelle_statut`) |
+| **`status`** | status de fin de course (`id_statut`, `libelle_statut`) |
 | **`resultats_laps`** | Table de faits tour par tour (`id_grand_prix`, `id_pilote`, `id_lap`, `id_ecurie`, `id_statut`, `lap_time`, `lap_avg_speed`) |
 | **`users`** | Comptes et rôles applicatifs (`id_user`, `nom_user`, `mdp_user`, `role`) |
 
@@ -73,6 +73,12 @@ Analyse historique des performances en Formule 1 (**1997–2026**) sur cinq circ
 3. **Gold (`data/03_gold/`) :** génération des tables finales nettoyées prêtes pour le chargement.
 4. **Stockage & Modélisation (Snowflake) :** création du schéma (`sql/schema.sql`), chargement des données et requêtage SQL.
 5. **Visualisation (Streamlit) :** application interactive modulaire (`app.py`, `onglets/`).
+
+---
+
+### Dictionnaire Gold & Alimentation de `data/03_gold/`
+
+Le fichier **`docs/dictionnaire_csv_gold.md`** documente la structure exacte des CSV produits dans **`data/03_gold/`** (colonnes, types, contraintes et fichiers `data/02_silver/` utilisés en entrée), incluant les adaptations et simplifications décidées pour la couche Gold avant chargement dans Snowflake. Pour remplir `data/03_gold/`, chaque notebook de nettoyage dédié dans `scripts/` (ex. `clean_circuits.ipynb`, `clean_status.ipynb`, `clean_lap_times.ipynb`) lit les CSV filtrés de `data/02_silver/` sur le périmètre **1997–2026** et les **5 circuits**, nettoie et renomme les champs selon le dictionnaire Gold, puis exporte le CSV final correspondant dans `data/03_gold/`.
 
 ---
 
@@ -127,4 +133,4 @@ Après validation du périmètre initial (**Axe 1 — Vitesse & Chronos**), le p
 | Axe / Périmètre | Évolutions tables / colonnes | Dataset source & CSV |
 | :--- | :--- | :--- |
 | **Axe 2 — Compétitivité** | Enrichir les données de course (`grid`, `positionOrder`, `laps`) et éventuellement ajouter une table `qualifications` (`q1`, `q2`, `q3`) | `TracingInsights/RaceData` (`dataset_2.zip`, CC0-1.0) : `results.csv`, `lap_times.csv`, `qualifying.csv` |
-| **Axe 3 — Fiabilité** | Catégoriser les statuts (`Termine`, `Mecanique`, `Accident/Incident`, `Autre`) et exploiter `laps` | `TracingInsights/RaceData` (`dataset_2.zip`, CC0-1.0) : `status.csv`, `results.csv` |
+| **Axe 3 — Fiabilité** | Catégoriser les status (`Termine`, `Mecanique`, `Accident/Incident`, `Autre`) et exploiter `laps` | `TracingInsights/RaceData` (`dataset_2.zip`, CC0-1.0) : `status.csv`, `results.csv` |

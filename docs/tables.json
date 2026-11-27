@@ -605,7 +605,7 @@
     },
     {
       "id": "REamEPrWuucN9_WUjykg4",
-      "name": "statuts",
+      "name": "status",
       "x": 453.90536141411076,
       "y": -859.1051703750301,
       "locked": false,
@@ -728,7 +728,7 @@
       ],
       "updateConstraint": "No action",
       "deleteConstraint": "No action",
-      "name": "fk_statuts_id_statut_resultats",
+      "name": "fk_status_id_statut_resultats",
       "color": "#808080",
       "id": "jHmSwoLPAqgYXpNunTuKG"
     },

@@ -77,8 +77,8 @@ Saisons rattachées à une réglementation.
 | `nom_grand_prix` | `VARCHAR(255)` | `NOT NULL` | Nom du Grand Prix |
 | `date_grand_prix` | `DATE` | `NOT NULL` | Date du Grand Prix |
 
-### `statuts` (`data/03_gold/statuts.csv`)
-Statuts d'arrivée ou d'abandon en course.
+### `status` (`data/03_gold/status.csv`)
+status d'arrivée ou d'abandon en course.
 
 | Colonne | Type | Contraintes | Source / Description |
 | :--- | :--- | :--- | :--- |
@@ -108,6 +108,6 @@ Performances tour par tour par Grand Prix et par pilote. Clé primaire composite
 | `id_pilote` | `INT` | `PK (2/3), NOT NULL, FK -> pilotes.id_pilote` | Pilote |
 | `id_lap` | `INT` | `PK (3/3), NOT NULL` | Numéro de tour |
 | `id_ecurie` | `INT` | `NOT NULL, FK -> ecuries.id_ecurie` | Écurie |
-| `id_statut` | `INT` | `NOT NULL, FK -> statuts.id_statut` | Statut de fin de course |
+| `id_statut` | `INT` | `NOT NULL, FK -> status.id_statut` | Statut de fin de course |
 | `lap_time` | `TIME` | `NULL` | Temps du tour |
 | `lap_avg_speed` | `FLOAT` | `NULL` | Vitesse moyenne sur le tour |

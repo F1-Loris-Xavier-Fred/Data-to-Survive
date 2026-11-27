@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS "grand_prix" (
     CONSTRAINT "fk_grand_prix_circuits" FOREIGN KEY ("id_circuit") REFERENCES "circuits" ("id_circuit")
 );
 
-CREATE TABLE IF NOT EXISTS "statuts" (
+CREATE TABLE IF NOT EXISTS "status" (
     "id_statut" INT AUTOINCREMENT,
     "libelle_statut" VARCHAR(255) NOT NULL,
     PRIMARY KEY ("id_statut")
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS "resultats_laps" (
     CONSTRAINT "fk_resultats_laps_grand_prix" FOREIGN KEY ("id_grand_prix") REFERENCES "grand_prix" ("id_grand_prix"),
     CONSTRAINT "fk_resultats_laps_pilotes" FOREIGN KEY ("id_pilote") REFERENCES "pilotes" ("id_pilote"),
     CONSTRAINT "fk_resultats_laps_ecuries" FOREIGN KEY ("id_ecurie") REFERENCES "ecuries" ("id_ecurie"),
-    CONSTRAINT "fk_resultats_laps_statuts" FOREIGN KEY ("id_statut") REFERENCES "statuts" ("id_statut")
+    CONSTRAINT "fk_resultats_laps_status" FOREIGN KEY ("id_statut") REFERENCES "status" ("id_statut")
 );
 
 CREATE TABLE IF NOT EXISTS "users" (
